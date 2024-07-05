@@ -1,0 +1,42 @@
+/*
+https://www.acmicpc.net/problem/15650
+중복을 허용하지 않는 조합
+자연수 N과 M이 주어졌을 때, 아래 조건을 만족하는 길이가 M인 수열을 모두 구하는 프로그램을 작성하시오.
+
+1부터 N까지 자연수 중에서 중복 없이 M개를 고른 수열
+고른 수열은 오름차순이어야 한다.
+
+중복을 허용하는거면 방문여부가 상관없다.
+*/
+#include <iostream>
+
+using namespace std;
+const int MAX_N = 8 + 2;
+int N, M;
+bool visited[MAX_N] = {false,};
+int ans[MAX_N] = {0,};
+
+void DFS(int idx, int depth){
+    if(depth == M){
+        for(int i = 0 ; i < M; i++)
+            printf("%d ", ans[i]);
+        printf("\n");
+        return;
+    }
+    for(int i = idx ; i < N; i++){
+        if(visited[i]) continue;
+        visited[i] = true;
+        ans[depth] = i + 1;
+        DFS(i, depth + 1);
+        visited[i] = false;
+        ans[depth] = 0;
+    }
+}
+
+int main(){
+
+    scanf("%d %d", &N, &M);
+    DFS(0, 0);
+
+    return 0;
+}
