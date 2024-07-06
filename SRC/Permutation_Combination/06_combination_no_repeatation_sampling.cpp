@@ -21,7 +21,7 @@ void mergeSort(int start, int end){
     int mid = (start + end) / 2;
     // 2. conquer
     mergeSort(start, mid);
-    mergeSort(mid+1, end);
+    mergeSort(mid + 1, end);
 
     // 3. merge
     int i = start, j = mid + 1, k = start;
@@ -35,15 +35,16 @@ void mergeSort(int start, int end){
     while ( j <= end) trr[k++] = arr[j++];
 
     // 4. copy
-    for (i = start; i<=end; i++)
+    for (i = start; i <= end; i++)
         arr[i] = trr[i];
 
 }
 
+
 void DFS(int idx, int depth){
     if (depth == M){
         for(int i = 0 ; i < M; i++){
-            printf("%d ", arr[i]);
+            printf("%d ", ans[i]);
         }
         printf("\n");
         return;
@@ -53,11 +54,12 @@ void DFS(int idx, int depth){
         if(visited[i]) continue;
         visited[i] = true;
         ans[depth] = arr[i];
-        DFS(i, depth+1);
+        DFS(i, depth + 1);
         visited[i] = false;    
         ans[depth] = 0;    
     }
 }
+
 
 int main(){
     scanf("%d %d", &N, &M);
@@ -65,7 +67,7 @@ int main(){
         scanf("%d", &arr[i]);
     }
 
-    mergeSort(0, N-1);
+    mergeSort(0, N - 1);
     DFS(0,0);
     return 0;
 }
